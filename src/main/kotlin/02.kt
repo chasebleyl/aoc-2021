@@ -1,5 +1,3 @@
-import java.io.File
-
 fun main() {
     `02`().partOne()
     println("---------------")
@@ -11,10 +9,10 @@ data class Movement(
     val units: Long
 )
 
-class `02` {
+class `02`: SolutionRunner() {
     fun partOne() {
         println("Running Part One")
-        val inputList: List<String> = buildInputList()
+        val inputList: List<String> = buildInputList(this.javaClass.kotlin.simpleName!!)
         var xPos: Long = 0
         var yPos: Long = 0
         inputList.forEach {
@@ -31,7 +29,7 @@ class `02` {
     }
     fun partTwo() {
         println("Running Part Two")
-        val inputList: List<String> = buildInputList()
+        val inputList: List<String> = buildInputList(this.javaClass.kotlin.simpleName!!)
         var xPos: Long = 0
         var yPos: Long = 0
         var aim: Long = 0
@@ -50,12 +48,4 @@ class `02` {
         }
         println("Result xPos=$xPos, yPos=$yPos, multipliedResult=${xPos * yPos}")
     }
-    private fun buildInputList(): List<String> {
-        val inputList: MutableList<String> = mutableListOf()
-        readInput().forEachLine {
-            inputList.add(it)
-        }
-        return inputList
-    }
-    private fun readInput(): File = File("src/main/resources/input_${this.javaClass.kotlin.simpleName}.txt")
 }

@@ -1,28 +1,20 @@
-import java.io.File
-
 fun main() {
     `00`().partOne()
     println("---------------")
     `00`().partTwo()
 }
 
-class `00` {
+class `00`: SolutionRunner() {
     fun partOne() {
         println("Running Part One")
+        val inputList: List<String> = buildInputList(this.javaClass.kotlin.simpleName!!)
         // TODO: Solve
         println("Result")
     }
     fun partTwo() {
         println("Running Part Two")
+        val inputList: List<String> = buildInputList(this.javaClass.kotlin.simpleName!!)
         // TODO: Solve
         println("Result")
     }
-    private fun buildInputList(): List<String> {
-        val inputList: MutableList<String> = mutableListOf()
-        readInput().forEachLine {
-            inputList.add(it)
-        }
-        return inputList
-    }
-    private fun readInput(): File = File("src/main/resources/input_${this.javaClass.kotlin.simpleName}.txt")
 }
