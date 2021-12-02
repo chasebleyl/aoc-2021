@@ -1,9 +1,9 @@
 import java.io.File
 
 fun main() {
-    `02`().partOne()
+    `01`().partOne()
     println("---------------")
-    `02`().partTwo()
+    `01`().partTwo()
 }
 
 class `01` {
