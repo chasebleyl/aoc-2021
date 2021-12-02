@@ -7,7 +7,6 @@ fun main() {
 }
 
 class `00` {
-    private val INPUT_FILE = "input_00.txt"
     fun partOne() {
         println("Running Part One")
         // TODO: Solve
@@ -25,5 +24,5 @@ class `00` {
         }
         return inputList
     }
-    private fun readInput(): File = File("src/main/resources/$INPUT_FILE")
+    private fun readInput(): File = File("src/main/resources/input_${this.javaClass.kotlin.simpleName}.txt")
 }

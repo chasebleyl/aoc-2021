@@ -7,7 +7,6 @@ fun main() {
 }
 
 class `01` {
-    private val INPUT_FILE = "input_01.txt"
     fun partOne() {
         println("Running Part One")
         val depths = buildInputList()
@@ -39,5 +38,5 @@ class `01` {
         }
         return inputList
     }
-    private fun readInput(): File = File("src/main/resources/$INPUT_FILE")
+    private fun readInput(): File = File("src/main/resources/input_${this.javaClass.kotlin.simpleName}.txt")
 }

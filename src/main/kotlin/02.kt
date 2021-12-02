@@ -12,7 +12,6 @@ data class Movement(
 )
 
 class `02` {
-    private val INPUT_FILE = "input_02.txt"
     fun partOne() {
         println("Running Part One")
         val inputList: List<String> = buildInputList()
@@ -58,5 +57,5 @@ class `02` {
         }
         return inputList
     }
-    private fun readInput(): File = File("src/main/resources/$INPUT_FILE")
+    private fun readInput(): File = File("src/main/resources/input_${this.javaClass.kotlin.simpleName}.txt")
 }
