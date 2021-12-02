@@ -29,12 +29,4 @@ class `01`: SolutionRunner() {
         }
         println("Total increases in depth=$increaseCounter")
     }
-//    private fun buildInputList(): List<Int> {
-//        val inputList: MutableList<Int> = mutableListOf()
-//        readInput().forEachLine {
-//            inputList.add(it.toInt())
-//        }
-//        return inputList
-//    }
-//    private fun readInput(): File = File("src/main/resources/input_${this.javaClass.kotlin.simpleName}.txt")
 }
