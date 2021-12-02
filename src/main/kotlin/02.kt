@@ -16,7 +16,6 @@ class `02` {
     fun partOne() {
         println("Running Part One")
         val inputList: List<String> = buildInputList()
-        val movements: MutableList<Movement> = mutableListOf()
         var xPos: Long = 0
         var yPos: Long = 0
         inputList.forEach {
@@ -25,7 +24,6 @@ class `02` {
                 elements[0],
                 elements[1].toLong()
             )
-            movements.add(movement)
             if (movement.direction == "forward") xPos += movement.units
             else if (movement.direction == "up") yPos -= movement.units
             else yPos += movement.units
@@ -35,7 +33,6 @@ class `02` {
     fun partTwo() {
         println("Running Part Two")
         val inputList: List<String> = buildInputList()
-        val movements: MutableList<Movement> = mutableListOf()
         var xPos: Long = 0
         var yPos: Long = 0
         var aim: Long = 0
@@ -45,7 +42,6 @@ class `02` {
                 elements[0],
                 elements[1].toLong()
             )
-            movements.add(movement)
             if (movement.direction == "forward") {
                 xPos += movement.units
                 yPos += movement.units * aim
