@@ -1,7 +1,7 @@
 fun main() {
-    `03`().partOne()
+    `00`().partOne()
     println("---------------")
-    `03`().partTwo()
+    `00`().partTwo()
 }
 
 class `00`: SolutionRunner() {
