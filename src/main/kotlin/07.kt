@@ -39,11 +39,12 @@ class `07`: SolutionRunner() {
         for (i in min..max) {
             var currentFuelUsage: Long = 0
             inputPosList.forEach { pos ->
-                currentFuelUsage += calculateExponentialDifference(kotlin.math.abs(pos - i))
+                currentFuelUsage += calculateNthTriangleNumber(kotlin.math.abs(pos - i))
             }
             fuelUsages.add(currentFuelUsage)
         }
         return fuelUsages.minOrNull()
     }
-    private fun calculateExponentialDifference(n: Int): Long = ((n*n + n)/2).toLong()
+    // https://en.wikipedia.org/wiki/Triangular_number
+    private fun calculateNthTriangleNumber(n: Int): Long = ((n*n + n)/2).toLong()
 }
