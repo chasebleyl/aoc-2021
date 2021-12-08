@@ -8,7 +8,6 @@ typealias Age = Int
 data class Fish(
     val age: Age,
     val firstCycle: Boolean,
-    var children: List<Fish> = listOf(),
 )
 
 class `06`: SolutionRunner() {
@@ -37,42 +36,41 @@ class `06`: SolutionRunner() {
     fun partTwo() {
         println("Running Part Two")
         val inputList: List<String> = buildInputList(this.javaClass.kotlin.simpleName!!)
-        val fish: List<Fish> = parseFish(inputList[0])
-        // TODO: Can't figure out right data structure and thus deal with overflows
-//        val daysToRun: Int = 256
-        val daysToRun: Int = 80
-        val school: List<Fish> = ageAndReproduceFish(fish, daysToRun)
+        val ages: List<Int> = parseInts(inputList[0])
+        // TODO: With how reproduceFish2 is structured, need to reproduce one less day to get correct answer
+        val daysToRun: Int = 256 - 1
+        val totalFish: Long = reproduceFish2(ages, daysToRun)
         // TODO: Solve
-        var fishCounter: Long = recursiveCount(school)
-        println("Result after $daysToRun days is $fishCounter fish")
+        println("Result after $daysToRun days is $totalFish fish")
     }
-    private fun ageAndReproduceFish(school: List<Fish>, day: Int): List<Fish> {
-        if (day == 0) return school
-        val newSchool: MutableList<Fish> = mutableListOf()
-        school.forEach { fish ->
-            val newChildren: List<Fish> = if (fish.children.isNotEmpty()) ageAndReproduceFish(fish.children, 1) else mutableListOf()
-            if (fish.age == 0) {
-                val newFish = Fish(6, true, listOf(Fish(8, true)) +  newChildren)
-                newSchool.add(newFish)
-            } else {
-                newSchool.add(Fish(fish.age - 1, fish.firstCycle, newChildren))
+    private fun reproduceFish2(ages: List<Int>, day: Int): Long {
+        var initialFishCounter: MutableMap<Age, Long> = mutableMapOf()
+        ages.forEach { age ->
+            if (initialFishCounter[age] != null) initialFishCounter[age] = initialFishCounter[age]!! + 1
+            else initialFishCounter[age] = 1
+        }
+        for (i in 0..day) {
+            val newFishCounter: MutableMap<Age, Long> = mutableMapOf()
+            initialFishCounter.forEach { age, count ->
+                if (age == 0) {
+                    if (newFishCounter[6] != null) newFishCounter[6] = newFishCounter[6]!! + count
+                    else newFishCounter[6] = count
+                    if (newFishCounter[8] != null) newFishCounter[8] = newFishCounter[8]!! + count
+                    else newFishCounter[8] = count
+                } else {
+                    if (newFishCounter[age-1] != null) newFishCounter[age-1] = newFishCounter[age-1]!! + count
+                    else newFishCounter[age-1] = count
+                }
             }
+            initialFishCounter = newFishCounter
         }
-        return ageAndReproduceFish(newSchool, day - 1)
-    }
-    private fun recursiveCount(school: List<Fish>): Long {
-        var newCounter: Long = 0
-        school.forEach { fish ->
-            newCounter += recursiveCountFish(fish)
+        println("Printing resulting fish counters $initialFishCounter")
+        var counter: Long = 0
+        initialFishCounter.forEach{ age, count ->
+            counter += count
         }
-        return newCounter
-    }
-    private fun recursiveCountFish(fish: Fish): Long {
-        var newCounter: Long = 1
-        fish.children.forEach { fish ->
-            newCounter += recursiveCountFish(fish)
-        }
-        return newCounter
+        return counter
     }
     private fun parseFish(inputString: String): List<Fish> = inputString.trim().split(",").map { Fish(it.toInt(), false) }
+    private fun parseInts(inputString: String): List<Int> = inputString.trim().split(",").map { it.toInt() }
 }
